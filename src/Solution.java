@@ -1,6 +1,8 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -9,7 +11,33 @@ public class Solution {
      * Complete the getMoneySpent function below.
      */
     static int getMoney(int[] keyboards, int[] drives, int b) {
-        return -1;
+        int moneySpend;
+        List<Integer> possibilityTotalSpends = new ArrayList<>();
+
+        int keyboardType = keyboards.length;
+        int drivesType = drives.length;
+
+        for (int i = 0; i < keyboardType; i++) {
+            for (int j = 0; j < drivesType; j++) {
+                int total = keyboards[i] + drives[j];
+                if (total <= b) {
+                    possibilityTotalSpends.add(total);
+                }
+            }
+        }
+
+        if (possibilityTotalSpends.isEmpty()) {
+            moneySpend = -1;
+        } else {
+            moneySpend = 0;
+            for (Integer possibilityTotalSpend : possibilityTotalSpends) {
+                if (moneySpend < possibilityTotalSpend) {
+                    moneySpend = possibilityTotalSpend;
+                }
+            }
+        }
+
+        return moneySpend;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
